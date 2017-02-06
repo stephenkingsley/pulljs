@@ -1,8 +1,8 @@
 {
   "name": "pulljs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "this is a pure javascript library to provide a lightweight and awesome pull to load",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "dev": "node devServer.js",
     "clean": "rimraf lib dist es",
