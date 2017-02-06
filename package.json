@@ -1,0 +1,50 @@
+{
+  "name": "pulljs",
+  "version": "0.1.0",
+  "description": "this is a pure javascript library to provide a lightweight and awesome pull to load",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node devServer.js",
+    "clean": "rimraf lib dist es",
+    "build": "npm run build:commonjs && npm run build:es",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "prepublish": "npm run clean && npm run build",
+    "lint": "eslint src",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephenkingsley/pulljs.git"
+  },
+  "keywords": [
+    "pull",
+    "javascript",
+    "lightweight",
+    "awesome"
+  ],
+  "author": "stephen.K",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephenkingsley/pulljs/issues"
+  },
+  "homepage": "https://github.com/stephenkingsley/pulljs#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.16.0",
+    "cross-env": "^3.1.4",
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "express": "^4.14.0",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^2.5.4",
+    "webpack": "^1.14.0",
+    "webpack-dev-middleware": "^1.9.0"
+  }
+}

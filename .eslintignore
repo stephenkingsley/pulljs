@@ -1,0 +1,9 @@
+node_modules
+scripts
+npm-debug.log
+.DS_Store
+*.log
+dist/
+example
+lib/
+es/

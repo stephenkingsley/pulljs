@@ -1,0 +1,24 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "no-param-reassign": 0,
+    "import/no-extraneous-dependencies": 0,
+    "no-use-before-define": 0,
+    "consistent-return": 0,
+    "arrow-parens": ["error", "as-needed"],
+    "no-unused-expressions": 0,
+    "no-underscore-dangle": 0
+  },
+  "env": {
+    "browser": "true"
+  },
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "experimentalObjectRestSpread": true
+    }
+  }
+}
