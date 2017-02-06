@@ -1,6 +1,6 @@
 {
   "name": "pulljs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "this is a pure javascript library to provide a lightweight and awesome pull to load",
   "main": "src/index.js",
   "scripts": {
