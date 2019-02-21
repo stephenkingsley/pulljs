@@ -5,5 +5,6 @@ Pull.init({
   instructionsPullToRefresh: 'Pull to Refresh',
   instructionsReleaseToRefresh: 'Release to Refresh',
   instructionsRefreshing: 'Refreshing',
-  onRefresh: () => alert('hello pulljs')
+  onRefresh: () => alert('hello pulljs'),
+  ptrOnDesktop: true
 });

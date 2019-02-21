@@ -38,6 +38,7 @@ Pull.init({
   refreshTimeout: 500,
   onRefresh: () => location.reload(),
   resistanceFunction: t => Math.min(1, t / 2.5),
+  ptrOnDesktop: false,
 });
 ```
 
@@ -54,3 +55,4 @@ Pull.init({
 |refreshTimeout|the delay, in milliseconds before the onRefresh is triggered|500|
 |onRefresh|what will the pull to refresh trigger? you can return a promise. Defaults to window.location.reload()|null|
 |resistanceFunction|the resistance function, accepts one parameter, must return a number, capping at 1. Defaults to t => Math.min(1, t / 2.5)|null|
+|ptrOnDesktop|enable desktop mouse functionality in addition to touch events|false
