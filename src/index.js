@@ -22,6 +22,7 @@ const _defaults = {
   onInit: () => {},
   onRefresh: () => location.reload(),
   resistanceFunction: t => Math.min(1, t / 2.5),
+  ptrOnDesktop: false,
 };
 
 let pullStartY = null;
@@ -59,6 +60,8 @@ function _update() {
 }
 
 function _setupEvents() {
+  const { ptrOnDesktop } = _SETTINGS;
+
   function onReset() {
     const { cssProp, ptrElement, classPrefix } = _SETTINGS;
 
@@ -71,8 +74,14 @@ function _setupEvents() {
   function _onTouchStart(e) {
     const { triggerElement } = _SETTINGS;
 
+    const screenY = e.touches ? e.touches[0].screenY : e.screenY;
+
+    if (ptrOnDesktop) {
+      window.addEventListener('mousemove', _onTouchMove, { passive: false });
+    }
+
     if (!window.scrollY) {
-      pullStartY = e.touches[0].screenY;
+      pullStartY = screenY;
     }
 
     if (_state !== 'pending') {
@@ -91,12 +100,14 @@ function _setupEvents() {
       ptrElement, resistanceFunction, distMax, distThreshold, cssProp, classPrefix,
     } = _SETTINGS;
 
+    const screenY = e.touches ? e.touches[0].screenY : e.screenY;
+
     if (!pullStartY) {
       if (!window.scrollY) {
-        pullStartY = e.touches[0].screenY;
+        pullStartY = screenY;
       }
     } else {
-      pullMoveY = e.touches[0].screenY;
+      pullMoveY = screenY;
     }
 
     if (!_enable || _state === 'refreshing') {
@@ -176,13 +187,25 @@ function _setupEvents() {
     ptrElement.classList.remove(`${classPrefix}release`);
     ptrElement.classList.remove(`${classPrefix}pull`);
 
-    pullStartY = pullMoveY = null;
-    dist = distResisted = 0;
+    pullStartY = null;
+    pullMoveY = null;
+    dist = 0;
+    distResisted = 0;
+
+    if (ptrOnDesktop) {
+      window.removeEventListener('mousemove', _onTouchMove);
+    }
   }
 
   window.addEventListener('touchend', _onTouchEnd);
   window.addEventListener('touchstart', _onTouchStart);
   window.addEventListener('touchmove', _onTouchMove, { passive: false });
+
+  if (ptrOnDesktop) {
+    window.addEventListener('mouseup', _onTouchEnd);
+    window.addEventListener('mousedown', _onTouchStart);
+    window.addEventListener('mousemove', _onTouchMove, { passive: false });
+  }
 
   // Store event handlers to use for teardown later
   return {
@@ -303,6 +326,12 @@ const Pull = {
         window.removeEventListener('touchstart', handlers.onTouchStart);
         window.removeEventListener('touchend', handlers.onTouchEnd);
         window.removeEventListener('touchmove', handlers.onTouchMove);
+
+        if (_SETTINGS.ptrOnDesktop) {
+          window.removeEventListener('mouseup', handlers.onTouchEnd);
+          window.removeEventListener('mousedown', handlers.onTouchStart);
+          window.removeEventListener('mousemove', handlers.onTouchMove);
+        }
 
         // Remove ptr element and style tag
         styleNode.parentNode.removeChild(styleNode);
