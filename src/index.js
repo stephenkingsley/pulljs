@@ -193,7 +193,7 @@ function _setupEvents() {
     distResisted = 0;
 
     if (ptrOnDesktop) {
-      window.removeEventListener('mousemove', _onTouchMove);
+      window.removeEventListener('mousemove', _onTouchMove, { passive: false });
     }
   }
 
@@ -325,12 +325,12 @@ const Pull = {
         // Teardown event listeners
         window.removeEventListener('touchstart', handlers.onTouchStart);
         window.removeEventListener('touchend', handlers.onTouchEnd);
-        window.removeEventListener('touchmove', handlers.onTouchMove);
+        window.removeEventListener('touchmove', handlers.onTouchMove, { passive: false });
 
         if (_SETTINGS.ptrOnDesktop) {
           window.removeEventListener('mouseup', handlers.onTouchEnd);
           window.removeEventListener('mousedown', handlers.onTouchStart);
-          window.removeEventListener('mousemove', handlers.onTouchMove);
+          window.removeEventListener('mousemove', handlers.onTouchMove, { passive: false });
         }
 
         // Remove ptr element and style tag
