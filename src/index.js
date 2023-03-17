@@ -339,7 +339,7 @@ const Pull = {
 
         // Enable setupEvents to run again
         _setup = false;
-        // resets state when module is loaded again
+        // resets _state on destory - will be useful when the element is destroyed while refresh is inprogress.
         _state = 'pending';
 
         // null object references
