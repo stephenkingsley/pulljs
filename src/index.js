@@ -339,6 +339,8 @@ const Pull = {
 
         // Enable setupEvents to run again
         _setup = false;
+        // resets state when module is loaded again
+        _state = 'pending';
 
         // null object references
         handlers = null;
